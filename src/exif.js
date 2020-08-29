@@ -9,7 +9,7 @@ class Exif {
 
     async readExifData(path) {
         return new Promise((resolve, reject) => {
-            exec(this._pathToExifTool + ' -json "' + path + '"', (error, stdout, stderr) => {
+            exec(this._pathToExifTool + ' -json -b "' + path + '"', (error, stdout, stderr) => {
                 if (error) {
                     reject(error)
                     return;
