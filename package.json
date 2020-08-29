@@ -1,0 +1,17 @@
+{
+  "name": "@zebrajaeger/filecategorizer",
+  "version": "1.0.0",
+  "description": "Read infos about file in filesystem",
+  "main": "src/category.js",
+  "scripts": {
+    "deploy": "npm publish --access public"
+  },
+  "keywords": ["file", "category", "exif", "exiftool", "hash", "stats", "mime"],
+  "author": "Lars Brandt",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zebrajaeger/node-filecategorizer.git"
+  },
+  "homepage": "https://github.com/zebrajaeger/node-filecategorizer/"
+}
