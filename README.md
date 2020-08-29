@@ -6,7 +6,7 @@
 ## Get all available Fileinfos
 
 ```javascript
-const {Category} = require("@zebrajaeger/categorizer");
+const {Category} = require("@zebrajaeger/filecategorizer");
 
 const category = new Category();
 category.categorizeFile('myFile.txt').then(data => console.log(data));
@@ -56,7 +56,7 @@ Returns i.E.
 ## Hash file
 
 ```javascript
-const {FileHash} = require("@zebrajaeger/categorizer");
+const {FileHash} = require("@zebrajaeger/filecategorizer");
 
 const fileHash = new FileHash();
 console.log(fileHash.hashFile('myFile.txt'));
@@ -72,7 +72,7 @@ f20127b81a2adc05f358990f5dff6e5323294f92432bbb2f36fc1f17b835a404
 ## Get File mime-Type
 
 ```javascript
-const {Mime} = require("@zebrajaeger/categorizer");
+const {Mime} = require("@zebrajaeger/filecategorizer");
 
 const mime = new Mime();
 mime.getMimeType('myFile.txt').then(mime=>console.log(mime))
@@ -93,7 +93,7 @@ Returns i.E.
 ## Get File stats
 
 ```javascript
-const {Stats} = require("@zebrajaeger/categorizer");
+const {Stats} = require("@zebrajaeger/filecategorizer");
 
 const stats = new Stats();
 console.log(stats.fileStats('myFile.txt'))
@@ -114,7 +114,7 @@ Returns i.E.
 ## Get Exif data
 
 ```javascript
-const {Exif} = require("@zebrajaeger/categorizer");
+const {Exif} = require("@zebrajaeger/filecategorizer");
 
 const exif = new Exif();
 exif.readExifData('myFile.txt').then(exif => console.log(exif));
