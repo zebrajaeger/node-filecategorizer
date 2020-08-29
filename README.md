@@ -3,6 +3,16 @@
 - Exif and Mime works on Linux only!
 - Requires [exiftool](https://wiki.ubuntuusers.de/ExifTool/) in path
 
+## Installation
+
+```bash
+npm install --save @zebrajaeger/filecategorizer
+```
+
+```bash
+yarn add  @zebrajaeger/filecategorizer
+```
+
 ## Get all available Fileinfos
 
 ```javascript
