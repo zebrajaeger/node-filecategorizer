@@ -9,30 +9,19 @@ class Category {
     mime_ = new Mime();
     stats_ = new Stats();
     ignoreErrors_ = true;
+    filterByMime_;
 
-    async categorizeFile(filePath) {
+    constructor(filterByMime) {
+        this.filterByMime_ = filterByMime;
+    }
+
+    async categorizeFile(filePath, filterByMime) {
+
+        const filter = filterByMime || this.filterByMime_;
+
         return new Promise(async (resolve, reject) => {
-            let exif;
-            try {
-                exif = await this.exif_.readExifData(filePath)
-            } catch (err) {
-                if (!this.ignoreErrors_) {
-                    reject(err);
-                    return;
-                }
-            }
 
-            let hash;
-            try {
-                hash = this.fileHash_.hashFile(filePath);
-            } catch (err) {
-                if (!this.ignoreErrors_) {
-                    reject(err);
-                    return;
-                }
-            }
-
-            let mime;
+            let mime, exif, hash, stats;
             try {
                 mime = await this.mime_.getMimeType(filePath);
             } catch (err) {
@@ -42,18 +31,40 @@ class Category {
                 }
             }
 
-            let stats;
-            try {
-                stats = this.stats_.fileStats(filePath);
-            } catch (err) {
-                if (!this.ignoreErrors_) {
-                    reject(err);
-                    return;
+            let rejectedByFilter = filter && !filter(mime);
+
+            if (!rejectedByFilter) {
+                try {
+                    exif = await this.exif_.readExifData(filePath)
+                } catch (err) {
+                    if (!this.ignoreErrors_) {
+                        reject(err);
+                        return;
+                    }
+                }
+
+                try {
+                    hash = this.fileHash_.hashFile(filePath);
+                } catch (err) {
+                    if (!this.ignoreErrors_) {
+                        reject(err);
+                        return;
+                    }
+                }
+
+                try {
+                    stats = this.stats_.fileStats(filePath);
+                } catch (err) {
+                    if (!this.ignoreErrors_) {
+                        reject(err);
+                        return;
+                    }
                 }
             }
 
             resolve({
                 mime,
+                rejectedByFilter,
                 hash,
                 stats,
                 exif,
@@ -63,5 +74,3 @@ class Category {
 }
 
 module.exports = {Category, Exif, FileHash, Mime, Stats}
-
-
