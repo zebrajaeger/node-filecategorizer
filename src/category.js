@@ -15,9 +15,19 @@ class Category {
         this.filterByMime_ = filterByMime;
     }
 
+    replaceAll(s, replace, by) {
+        return s.split(replace).join(by);
+    }
+
+    shellifyString(s) {
+        s = this.replaceAll(s, '\'', '\\\'')
+        return '$\'' + s + '\'';
+    }
+
     async categorizeFile(filePath, filterByMime) {
 
         const filter = filterByMime || this.filterByMime_;
+        filePath = this.shellifyString(filePath);
 
         return new Promise(async (resolve, reject) => {
 
